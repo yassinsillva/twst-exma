@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Content Access</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            height: 100vh;
+            margin: 0;
+            color: #f8fafc;
+        }
+        
+        .password-container {
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        .video-container {
+            animation: slideUp 0.6s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .password-input {
+            caret-color: #38bdf8;
+            letter-spacing: 1px;
+        }
+        
+        .btn-primary {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .btn-secondary {
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #334155;
+        }
+        
+        .logo {
+            filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.3));
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center">
+    <div id="password-screen" class="password-container w-full max-w-md px-6">
+        <div class="flex flex-col items-center mb-8">
+            <div class="logo mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 15v2m-6 4h12a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2zm10-10V7a4 4 0 0 0-8 0v4h8z"/>
+                </svg>
+            </div>
+            <h1 class="text-3xl font-bold text-center text-sky-400 mb-2">Premium Content Access</h1>
+            <p class="text-slate-300 text-center">Enter your credentials to view exclusive content</p>
+        </div>
+        
+        <div class="bg-slate-800 rounded-xl p-6 shadow-xl border border-slate-700">
+            <div class="mb-6">
+                <label for="password" class="block text-sm font-medium text-slate-300 mb-2">Password</label>
+                <div class="relative">
+                    <input 
+                        type="password" 
+                        id="password" 
+                        class="w-full px-4 py-3 rounded-lg bg-slate-700 border border-slate-600 focus:border-sky-500 focus:ring-1 focus:ring-sky-500 outline-none transition text-slate-200 password-input"
+                        placeholder="Enter your access code">
+                    <div class="absolute inset-y-0 right-0 flex items-center pr-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex space-x-3">
+                <button id="submit-btn" class="btn-primary flex-1 bg-sky-600 hover:bg-sky-500 text-white py-3 px-4 rounded-lg font-medium">
+                    PLAY VIDEO
+                </button>
+                <button id="cancel-btn" class="btn-secondary flex-1 bg-slate-700 hover:bg-slate-600 text-slate-200 py-3 px-4 rounded-lg font-medium">
+                    CANCEL
+                </button>
+            </div>
+            
+            <div id="error-message" class="mt-4 text-center text-rose-400 text-sm hidden">
+                Incorrect password. Please try again.
+            </div>
+        </div>
+        
+    </div>
+    
+    <div id="video-screen" class="video-container hidden w-full max-w-4xl px-6">
+        <div class="mb-6 flex justify-between items-center">
+            <h2 class="text-2xl font-bold text-sky-400">Exclusive Video Content</h2>
+            <button id="close-video" class="text-slate-400 hover:text-slate-200 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        
+        <div class="bg-black rounded-xl overflow-hidden shadow-xl">
+            <video id="secure-video" controls class="w-full" poster="https://placehold.co/1920x1080?text=Premium+Content">
+                <source src="video1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="p-4 bg-slate-800">
+                <h3 class="text-lg font-semibold text-slate-200">Video 1</h3>
+                <p class="text-sm text-slate-400 mt-1">Exclusive content for members only</p>
+            </div>
+        </div>
+        
+        <div class="mt-6 text-center text-sm text-slate-400">
+            <p>Thank you for accessing our premium content library</p>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const passwordInput = document.getElementById('password');
+            const submitBtn = document.getElementById('submit-btn');
+            const cancelBtn = document.getElementById('cancel-btn');
+            const errorMessage = document.getElementById('error-message');
+            const passwordScreen = document.getElementById('password-screen');
+            const videoScreen = document.getElementById('video-screen');
+            const videoPlayer = document.getElementById('secure-video');
+            const closeVideoBtn = document.getElementById('close-video');
+            
+            const CORRECT_PASSWORD = '1234';
+            
+            submitBtn.addEventListener('click', function() {
+                if (passwordInput.value === CORRECT_PASSWORD) {
+                    // Correct password
+                    passwordScreen.classList.add('hidden');
+                    videoScreen.classList.remove('hidden');
+                    videoPlayer.play();
+                } else {
+                    // Incorrect password
+                    errorMessage.classList.remove('hidden');
+                    passwordInput.classList.add('border-rose-500', 'ring-1', 'ring-rose-500');
+                    setTimeout(() => {
+                        errorMessage.classList.add('hidden');
+                        passwordInput.classList.remove('border-rose-500', 'ring-1', 'ring-rose-500');
+                    }, 3000);
+                }
+            });
+            
+            cancelBtn.addEventListener('click', function() {
+                passwordInput.value = '';
+            });
+            
+            closeVideoBtn.addEventListener('click', function() {
+                videoScreen.classList.add('hidden');
+                passwordScreen.classList.remove('hidden');
+                videoPlayer.pause();
+                videoPlayer.currentTime = 0;
+                passwordInput.value = '';
+            });
+            
+            // Listen for Enter key
+            passwordInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    submitBtn.click();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
